@@ -1,5 +1,5 @@
 //
-//  EnumUtil.swift v.0.1.0
+//  EnumUtil.swift v.0.2.0
 //  SwiftUtilBiPIOS
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -14,10 +14,22 @@ import Foundation
 ///     var letter = MyEnum.a
 ///     letter = letter.next
 extension CaseIterable where Self: Equatable {
-    var next:  Self {
+    /// Returns the next enumerated value (circular)
+    var next: Self {
         let all = Self.allCases
         let idx = all.firstIndex(of: self)!
         let next = all.index(after: idx)
         return all[next == all.endIndex ? all.startIndex : next]
+    }
+
+    /// increments (circular) the enum value in-place
+    mutating func increment() {
+        self = next
+    }
+
+    /// increments (circular) the enum value in-place
+    mutating func incremented() -> Self {
+        increment()
+        return self
     }
 }

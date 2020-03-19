@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.backgroundColor = .white
+        view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -90,7 +91,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @objc func nextButtonTap(start: Bool = false) {
         if !start {
-            generator.mode = generator.mode.next
+            generator.mode.increment()
         }
         printClassAndFunc()
         nextModeButton.setTitle(generator.mode.rawValue, for: .normal)
@@ -112,7 +113,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @objc func correctionButtonTap(start: Bool = false) {
         if !start {
-            generator.correctionLevel = generator.correctionLevel.next
+            generator.correctionLevel.increment()
         }
         printClassAndFunc()
         correctionButton.setTitle("\(generator.correctionLevel.rawValue) \(generator.correctionLevel.pct)", for: .normal)
