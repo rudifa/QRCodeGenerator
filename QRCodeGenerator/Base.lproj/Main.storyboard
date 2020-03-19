@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,60 +14,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CR9-4U-wyD">
-                                <rect key="frame" x="16" y="20" width="343" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrI-ao-IPP">
-                                <rect key="frame" x="249" y="72" width="110" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Generate QR"/>
-                                <connections>
-                                    <action selector="performQRButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L3G-Ki-MwO"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gau-Z9-vIi">
-                                <rect key="frame" x="87" y="133" width="200" height="200"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="fPX-4h-zNV"/>
-                                </constraints>
-                            </imageView>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="nn6-UK-fqh">
-                                <rect key="frame" x="85" y="433" width="204" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="HzE-WZ-DzK"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="changeImageScaleSliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="9jv-aQ-f8J"/>
-                                </connections>
-                            </slider>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="CR9-4U-wyD" firstAttribute="trailing" secondItem="nrI-ao-IPP" secondAttribute="trailing" id="4lF-Od-Zpn"/>
-                            <constraint firstItem="CR9-4U-wyD" firstAttribute="centerX" secondItem="gau-Z9-vIi" secondAttribute="centerX" id="EMb-rH-e8g"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nn6-UK-fqh" secondAttribute="bottom" constant="205" id="I9d-DQ-RiO"/>
-                            <constraint firstItem="nn6-UK-fqh" firstAttribute="trailing" secondItem="gau-Z9-vIi" secondAttribute="trailing" id="QeM-VJ-a8L"/>
-                            <constraint firstItem="nrI-ao-IPP" firstAttribute="top" secondItem="CR9-4U-wyD" secondAttribute="bottom" constant="18" id="Rn8-tb-uVP"/>
-                            <constraint firstItem="gau-Z9-vIi" firstAttribute="top" secondItem="nrI-ao-IPP" secondAttribute="bottom" constant="26" id="W1W-1L-vMx"/>
-                            <constraint firstItem="nrI-ao-IPP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="aE0-nn-Mu1"/>
-                            <constraint firstItem="CR9-4U-wyD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="bfW-xX-5wa"/>
-                            <constraint firstItem="CR9-4U-wyD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eAv-Bg-9de"/>
-                            <constraint firstItem="gau-Z9-vIi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="jdd-5Y-iSr"/>
-                            <constraint firstItem="nn6-UK-fqh" firstAttribute="leading" secondItem="gau-Z9-vIi" secondAttribute="leading" id="qH3-yf-PLP"/>
-                            <constraint firstItem="CR9-4U-wyD" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="r43-Wj-dUZ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="qrCodeButton" destination="nrI-ao-IPP" id="izk-Re-CFB"/>
-                        <outlet property="qrCodeImageView" destination="gau-Z9-vIi" id="Bru-cG-uoH"/>
-                        <outlet property="slider" destination="nn6-UK-fqh" id="Np7-bF-gQl"/>
-                        <outlet property="textField" destination="CR9-4U-wyD" id="FEv-cC-XDk"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

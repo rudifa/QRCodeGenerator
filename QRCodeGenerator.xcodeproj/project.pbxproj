@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3A426D2420F8C3000F666D /* DebugUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3A426C2420F8C3000F666D /* DebugUtil.swift */; };
+		9D950F882422A9A600F4DA55 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */; };
+		9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */; };
+		9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF52423A460008DFCF5 /* UIUtil.swift */; };
 		9DFDC2C823B12EF500E939D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDC2C723B12EF500E939D1 /* AppDelegate.swift */; };
 		9DFDC2CA23B12EF500E939D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDC2C923B12EF500E939D1 /* SceneDelegate.swift */; };
 		9DFDC2CC23B12EF500E939D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDC2CB23B12EF500E939D1 /* ViewController.swift */; };
@@ -17,6 +21,10 @@
 
 /* Begin PBXFileReference section */
 		9D3A426A2420D530000F666D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9D3A426C2420F8C3000F666D /* DebugUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugUtil.swift; sourceTree = "<group>"; };
+		9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumUtil.swift; sourceTree = "<group>"; };
+		9DB63EF52423A460008DFCF5 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		9DFDC2C423B12EF500E939D1 /* QRCodeGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFDC2C723B12EF500E939D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DFDC2C923B12EF500E939D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +46,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3A426B2420F899000F666D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */,
+				9D3A426C2420F8C3000F666D /* DebugUtil.swift */,
+				9DB63EF52423A460008DFCF5 /* UIUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		9DFDC2BB23B12EF500E939D1 = {
 			isa = PBXGroup;
 			children = (
@@ -61,9 +79,11 @@
 				9DFDC2C723B12EF500E939D1 /* AppDelegate.swift */,
 				9DFDC2C923B12EF500E939D1 /* SceneDelegate.swift */,
 				9DFDC2CB23B12EF500E939D1 /* ViewController.swift */,
+				9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */,
 				9DFDC2CD23B12EF500E939D1 /* Main.storyboard */,
 				9DFDC2D023B12EF700E939D1 /* Assets.xcassets */,
 				9DFDC2D223B12EF700E939D1 /* LaunchScreen.storyboard */,
+				9D3A426B2420F899000F666D /* Util */,
 				9DFDC2D523B12EF700E939D1 /* Info.plist */,
 			);
 			path = QRCodeGenerator;
@@ -140,9 +160,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D950F882422A9A600F4DA55 /* QRCodeGenerator.swift in Sources */,
 				9DFDC2CC23B12EF500E939D1 /* ViewController.swift in Sources */,
+				9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */,
 				9DFDC2C823B12EF500E939D1 /* AppDelegate.swift in Sources */,
+				9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */,
 				9DFDC2CA23B12EF500E939D1 /* SceneDelegate.swift in Sources */,
+				9D3A426D2420F8C3000F666D /* DebugUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
