@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D3A426D2420F8C3000F666D /* DebugUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3A426C2420F8C3000F666D /* DebugUtil.swift */; };
+		9D6BF2AE2424D388008E0A1F /* RegexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */; };
 		9D950F882422A9A600F4DA55 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */; };
 		9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */; };
 		9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF52423A460008DFCF5 /* UIUtil.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		9D3A426A2420D530000F666D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9D3A426C2420F8C3000F666D /* DebugUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugUtil.swift; sourceTree = "<group>"; };
+		9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
 		9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumUtil.swift; sourceTree = "<group>"; };
 		9DB63EF52423A460008DFCF5 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
@@ -88,9 +90,10 @@
 		9DB63EFC242429F4008DFCF5 /* QRCodeGeneratorTests */ = {
 			isa = PBXGroup;
 			children = (
-				9DB63F0924242A4E008DFCF5 /* UIUtilTest.swift */,
 				9DB63F0624242A22008DFCF5 /* DebugUtilTests.swift */,
 				9DB63F0524242A22008DFCF5 /* EnumUtilTests.swift */,
+				9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */,
+				9DB63F0924242A4E008DFCF5 /* UIUtilTest.swift */,
 				9DB63EFF242429F4008DFCF5 /* Info.plist */,
 			);
 			path = QRCodeGeneratorTests;
@@ -235,6 +238,7 @@
 				9DB63F0B24242A62008DFCF5 /* EnumUtil.swift in Sources */,
 				9DB63F0724242A23008DFCF5 /* EnumUtilTests.swift in Sources */,
 				9DB63F0824242A23008DFCF5 /* DebugUtilTests.swift in Sources */,
+				9D6BF2AE2424D388008E0A1F /* RegexUtil.swift in Sources */,
 				9DB63F0D24242A6A008DFCF5 /* UIUtil.swift in Sources */,
 				9DB63F0E24242A87008DFCF5 /* QRCodeGenerator.swift in Sources */,
 				9DB63F0A24242A4E008DFCF5 /* UIUtilTest.swift in Sources */,
