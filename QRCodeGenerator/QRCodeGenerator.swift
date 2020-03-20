@@ -32,11 +32,19 @@ struct QRCodeGenerator {
         case clearOnWhite
     }
 
-    var qrText: String = ""
-    var correctionLevel = CorrectionLevel.corrPct25
-    var imageSidePt = CGFloat(0.0) // 0.0 => scale == 1.0
-    var urlEncoded = false
-    var mode = Mode.blackOnWhite
+    var qrText: String
+    var correctionLevel: CorrectionLevel
+    var imageSidePt: CGFloat // 0.0 => scale == 1.0
+    var urlEncoded: Bool
+    var mode: Mode
+
+    init(qrText: String = "", correctionLevel: CorrectionLevel = .corrPct25, imageSidePt: CGFloat = 0.0, urlEncoded: Bool = false, mode: Mode = .blackOnWhite) {
+        self.qrText = qrText
+        self.correctionLevel = correctionLevel
+        self.imageSidePt = imageSidePt
+        self.urlEncoded = urlEncoded
+        self.mode = mode
+    }
 
     var qrTextPlainOrUrlEncoded: String {
         switch urlEncoded {
@@ -54,9 +62,9 @@ struct QRCodeGenerator {
         return ciImage(from: qrTextPlainOrUrlEncoded)
     }
 
-    func uiImage(mode: Mode = .blackOnWhite, sizePt: Int = 0) -> UIImage? {
+    var uiImage: UIImage? {
         if let image = ciImage {
-            switch self.mode {
+            switch mode {
             case .blackOnWhite:
                 return UIImage(ciImage: image)
             case .whiteOnClear:
@@ -68,7 +76,7 @@ struct QRCodeGenerator {
         return nil
     }
 
-    func ciImage(from string: String) -> CIImage? {
+    private func ciImage(from string: String) -> CIImage? {
         // Core Image Filter Reference says:
         // To create a QR code from a string or URL, convert it to an NSData object using NSISOLatin1StringEncoding.
         if let data = string.data(using: .isoLatin1),
@@ -87,7 +95,7 @@ struct QRCodeGenerator {
     }
 
     // Convert the black-on-white QR code image to white-on-clear image
-    func whiteOnClear(ciImage: CIImage) -> UIImage {
+    private func whiteOnClear(ciImage: CIImage) -> UIImage {
         if let colorInvertFilter = CIFilter(name: "CIColorInvert"),
             let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") {
             colorInvertFilter.setValue(ciImage, forKey: "inputImage")
@@ -102,7 +110,7 @@ struct QRCodeGenerator {
     }
 
     // Convert the black-on-white QR code image to clear-on-white
-    func clearOnWhite(ciImage: CIImage) -> UIImage? {
+    private func clearOnWhite(ciImage: CIImage) -> UIImage? {
         if let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") {
             maskToAlphaFilter.setValue(ciImage, forKey: "inputImage")
             if let output2 = maskToAlphaFilter.outputImage {

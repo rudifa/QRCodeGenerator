@@ -222,7 +222,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func displayQRImage() {
-        if let uiImage = generator.uiImage() {
+        if let uiImage = generator.uiImage {
             qrCodeImageView.image = uiImage
             printClassAndFunc(info: "uiImage.size= \(uiImage.size)")
         }
