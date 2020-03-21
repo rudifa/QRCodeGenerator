@@ -15,5 +15,3 @@ jobs:
     - uses: actions/checkout@master
     - name: Run tests iOS
       run: xcodebuild clean test -project QRCodeGenerator.xcodeproj -scheme QRCodeGenerator -destination "platform=iOS Simulator,name=iPhone 11 Pro"
-    - name: Run tests iOS
-      run: xcodebuild clean test -project QRCodeGenerator.xcodeproj -scheme QRCodeGeneratorPkg -destination "platform=iOS Simulator,name=iPhone 11 Pro"
