@@ -1,5 +1,5 @@
 //
-//  UIUtil.swift v.0.1.5
+//  UIUtil.swift v.0.2.0
 //  SwiftUtilBiP
 //
 //  Created by Rudolf Farkas on 04.09.18.
@@ -50,5 +50,110 @@ extension UIColor {
             }
         }
         self.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+    }
+}
+
+// MARK: factory methods
+
+// https://cocoacasts.com/elegant-controls-in-swift-with-closures
+/// Button with storage for an action callback
+class ButtonWithAction: UIButton {
+    typealias ActionCallback = (ButtonWithAction) -> Void
+
+    // On notification from the button calls the actionCallback
+    @objc private func onTouchUpInside(sender: UIButton) {
+        if let actionCallback = actionCallback {
+            actionCallback(self)
+        }
+    }
+
+    // Receives an assignment of a callback or nil (to remove it)
+    var actionCallback: ActionCallback? {
+        didSet {
+            if actionCallback != nil {
+                addTarget(self, action: #selector(onTouchUpInside), for: .touchUpInside)
+            } else {
+                removeTarget(self, action: #selector(onTouchUpInside), for: .touchUpInside)
+            }
+        }
+    }
+}
+
+/*
+ Examples of creation of buttons with actions
+ private lazy var backgroundColorButton = UIButton.actionButtonPref(title: "Button0", action: backgroundColorButtonTap)
+ private lazy var button1 = UIButton.actionButtonPref(title: "Button1", action: { _ in self.printClassAndFunc(info: "Button1") })
+ Example of removing the action
+ */
+extension UIButton {
+    /// Returns an instance of ActionButton, configured and initializeed with an action callback.
+    /// - Parameters:
+    ///   - title: button title for .normal
+    ///   - action: action callback
+    static func actionButton(title: String, action: @escaping ButtonWithAction.ActionCallback) -> ButtonWithAction {
+        let button = ButtonWithAction(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGray // uncomment for visual debugging
+        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.setTitle(title, for: .normal)
+        button.sizeToFit()
+        button.actionCallback = action
+        return button
+    }
+}
+
+extension UIButton {
+    /// Returns an instance of UIButton, configured.
+    /// - Parameter title: button title for .normal
+    static func configuredButton(title: String) -> UIButton {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGray // uncomment for visual debugging
+        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.setTitle(title, for: .normal)
+        button.sizeToFit()
+        return button
+    }
+}
+
+extension UIStackView {
+    /// Returns a configured horizontal stack view with subviews
+    /// - Parameter subviews: to add to the stack view
+    static func horizontalPref(subviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false // vital
+
+        stackView.axis = .horizontal
+        stackView.alignment = .fill // .leading .firstBaseline .center .trailing .lastBaseline
+        stackView.distribution = .fillEqually // .fillEqually .fillProportionally .equalSpacing .equalCentering
+        stackView.spacing = UIStackView.spacingUseSystem
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 8)
+
+        for subview in subviews {
+            stackView.addArrangedSubview(subview)
+        }
+        return stackView
+    }
+
+    /// Returns a configured vertical stack view with subviews
+    /// - Parameter subviews: to add to the stack view
+    static func verticalPref(subviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false // vital
+
+        stackView.axis = .vertical
+        stackView.alignment = .fill // .leading .firstBaseline .center .trailing .lastBaseline
+        stackView.distribution = .fillEqually // .fillEqually .fillProportionally .equalSpacing .equalCentering
+        stackView.spacing = UIStackView.spacingUseSystem
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+
+        for subview in subviews {
+            stackView.addArrangedSubview(subview)
+        }
+        return stackView
     }
 }
