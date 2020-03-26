@@ -28,9 +28,6 @@ class QRCodeGeneratorTests: XCTestCase {
 
         // check images generated with default settings
 
-        printClassAndFunc(info: "\(generator.ciImage!.description)")
-        XCTAssertTrue(generator.ciImage!.description ~= #"^<CIImage: 0x[0-9a-f]{12} extent \[0 0 23 23\]>$"#)
-
         printClassAndFunc(info: "\(generator.uiImage!.description)")
         XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
 
