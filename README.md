@@ -29,9 +29,14 @@ var correctionLevel: CorrectionLevel    // correction/reundancy level
 var imageSidePt: CGFloat                // side size of the quadratic generated image
 var urlEncoded: Bool                    // url-encodes qrText if true else uses qrText
 var mode: Mode                          // output mode
+var foregroundColor: CIColor            // color of the QRCode image
 
 CorrectionLevel:    corrPct7, corrPct15, corrPct25, corrPct30
-Mode:               blackOnWhite, whiteOnClear, clearOnWhite
+
+Mode:               blackOnClear, blackOnColored, blackOnWhite,
+                    clearOnBlack, clearOnColored, clearOnWhite,
+                    coloredOnBlack, coloredOnClear, coloredOnWhite,
+                    whiteOnBlack, whiteOnClear, whiteOnColored
 
 ```
 
@@ -65,3 +70,8 @@ Get the generated QR code image:
 ```
 let image: UIImage = generator.uiImage()!
 ```
+
+## class ViewController
+
+Provides a test-and-demo UI for various foregraound and background colors, QRCode image size and modes,
+QRCode redundancy (7%-30%), urlEncoded or plain, and export to photos or to printer.
