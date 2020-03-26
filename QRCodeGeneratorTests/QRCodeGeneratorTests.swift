@@ -20,16 +20,13 @@ class QRCodeGeneratorTests: XCTestCase {
 
         // check default settings
 
-        XCTAssertEqual(generator.qrText, "")
+        XCTAssertEqual(generator.qrText, "hello")
         XCTAssertEqual(generator.correctionLevel, QRCodeGenerator.CorrectionLevel.corrPct25)
         XCTAssertEqual(generator.imageSidePt, 0.0)
         XCTAssertEqual(generator.urlEncoded, false)
         XCTAssertEqual(generator.mode, QRCodeGenerator.Mode.blackOnWhite)
 
         // check images generated with default settings
-
-        printClassAndFunc(info: "\(generator.ciImage!.description)")
-        XCTAssertTrue(generator.ciImage!.description ~= #"^<CIImage: 0x[0-9a-f]{12} extent \[0 0 23 23\]>$"#)
 
         printClassAndFunc(info: "\(generator.uiImage!.description)")
         XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
