@@ -20,7 +20,7 @@ class QRCodeGeneratorTests: XCTestCase {
 
         // check default settings
 
-        XCTAssertEqual(generator.qrText, "")
+        XCTAssertEqual(generator.qrText, "hello")
         XCTAssertEqual(generator.correctionLevel, QRCodeGenerator.CorrectionLevel.corrPct25)
         XCTAssertEqual(generator.imageSidePt, 0.0)
         XCTAssertEqual(generator.urlEncoded, false)

@@ -1,5 +1,5 @@
 //
-//  UIUtil.swift v.0.2.0
+//  UIUtil.swift v.0.2.1
 //  SwiftUtilBiP
 //
 //  Created by Rudolf Farkas on 04.09.18.
@@ -99,6 +99,7 @@ extension UIButton {
         button.setTitle(title, for: .normal)
         button.sizeToFit()
         button.actionCallback = action
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }
 }
@@ -114,6 +115,7 @@ extension UIButton {
         button.titleLabel?.font = .systemFont(ofSize: 16)
         button.setTitle(title, for: .normal)
         button.sizeToFit()
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }
 }
@@ -121,7 +123,7 @@ extension UIButton {
 extension UIStackView {
     /// Returns a configured horizontal stack view with subviews
     /// - Parameter subviews: to add to the stack view
-    static func horizontalPref(subviews: [UIView]) -> UIStackView {
+    static func horizontal(subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false // vital
 
@@ -140,7 +142,7 @@ extension UIStackView {
 
     /// Returns a configured vertical stack view with subviews
     /// - Parameter subviews: to add to the stack view
-    static func verticalPref(subviews: [UIView]) -> UIStackView {
+    static func vertical(subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false // vital
 
@@ -155,5 +157,23 @@ extension UIStackView {
             stackView.addArrangedSubview(subview)
         }
         return stackView
+    }
+}
+
+extension UIView {
+    /// Adds overlaid on top of self, stretching to cover the self
+    /// - Parameters:
+    ///   - overlaid: sibling view to add
+    public func addSibling(overlaid: UIView) {
+        if let superview = self.superview {
+            superview.addSubview(overlaid)
+            overlaid.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                overlaid.leftAnchor.constraint(equalTo: leftAnchor),
+                overlaid.rightAnchor.constraint(equalTo: rightAnchor),
+                overlaid.topAnchor.constraint(equalTo: topAnchor),
+                overlaid.bottomAnchor.constraint(equalTo: bottomAnchor),
+            ])
+        }
     }
 }
