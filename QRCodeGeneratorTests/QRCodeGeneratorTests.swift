@@ -29,29 +29,29 @@ class QRCodeGeneratorTests: XCTestCase {
         // check images generated with default settings
 
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
 
         // check images generated with modified settings
 
         generator.qrText = "Hello"
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
 
         generator.correctionLevel = .corrPct7
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{23, 23\}>$"#)
 
         generator.imageSidePt = 100.0
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
 
         generator.urlEncoded = true
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
 
         generator.mode = .clearOnWhite
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
+        xctAssertMatches(generator.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{100, 100\}>$"#)
 
         // create an instance with modified settings
 
@@ -59,6 +59,6 @@ class QRCodeGeneratorTests: XCTestCase {
 
         // check image generated with modified settings
         printClassAndFunc(info: "\(generator.uiImage!.description)")
-        XCTAssertTrue(generator2.uiImage!.description ~= #"^<UIImage:0x[0-9a-f]{12} anonymous \{200, 200\}>$"#)
+        xctAssertMatches(generator2.uiImage!.description, #"^<UIImage:0x[0-9a-f]{12} anonymous \{200, 200\}>$"#)
     }
 }
