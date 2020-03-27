@@ -11,6 +11,7 @@
 		9D6BF2AE2424D388008E0A1F /* RegexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */; };
 		9D6BF2B02424DD3F008E0A1F /* QRCodeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6BF2AF2424DD3F008E0A1F /* QRCodeGeneratorTests.swift */; };
 		9D950F882422A9A600F4DA55 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */; };
+		9DA3A0CD242EA61200C7B897 /* XCTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3A0CC242EA61200C7B897 /* XCTestUtil.swift */; };
 		9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */; };
 		9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF52423A460008DFCF5 /* UIUtil.swift */; };
 		9DB63F0724242A23008DFCF5 /* EnumUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63F0524242A22008DFCF5 /* EnumUtilTests.swift */; };
@@ -44,6 +45,7 @@
 		9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
 		9D6BF2AF2424DD3F008E0A1F /* QRCodeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorTests.swift; sourceTree = "<group>"; };
 		9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		9DA3A0CC242EA61200C7B897 /* XCTestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestUtil.swift; sourceTree = "<group>"; };
 		9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumUtil.swift; sourceTree = "<group>"; };
 		9DB63EF52423A460008DFCF5 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		9DB63EFB242429F4008DFCF5 /* QRCodeGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QRCodeGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 				9D6BF2AF2424DD3F008E0A1F /* QRCodeGeneratorTests.swift */,
 				9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */,
 				9DB63F0924242A4E008DFCF5 /* UIUtilTest.swift */,
+				9DA3A0CC242EA61200C7B897 /* XCTestUtil.swift */,
 				9DB63EFF242429F4008DFCF5 /* Info.plist */,
 			);
 			path = QRCodeGeneratorTests;
@@ -242,6 +245,7 @@
 				9DB63F0724242A23008DFCF5 /* EnumUtilTests.swift in Sources */,
 				9DB63F0824242A23008DFCF5 /* DebugUtilTests.swift in Sources */,
 				9D6BF2AE2424D388008E0A1F /* RegexUtil.swift in Sources */,
+				9DA3A0CD242EA61200C7B897 /* XCTestUtil.swift in Sources */,
 				9D6BF2B02424DD3F008E0A1F /* QRCodeGeneratorTests.swift in Sources */,
 				9DB63F0D24242A6A008DFCF5 /* UIUtil.swift in Sources */,
 				9DB63F0E24242A87008DFCF5 /* QRCodeGenerator.swift in Sources */,
