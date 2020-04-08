@@ -11,6 +11,7 @@
 		9D6BF2AE2424D388008E0A1F /* RegexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */; };
 		9D6BF2B02424DD3F008E0A1F /* QRCodeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6BF2AF2424DD3F008E0A1F /* QRCodeGeneratorTests.swift */; };
 		9D950F882422A9A600F4DA55 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */; };
+		9D95856A243E21700046F25B /* ColorMatrixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D958569243E21700046F25B /* ColorMatrixViewController.swift */; };
 		9DA3A0CD242EA61200C7B897 /* XCTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3A0CC242EA61200C7B897 /* XCTestUtil.swift */; };
 		9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */; };
 		9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB63EF52423A460008DFCF5 /* UIUtil.swift */; };
@@ -45,6 +46,7 @@
 		9D6BF2AD2424D388008E0A1F /* RegexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
 		9D6BF2AF2424DD3F008E0A1F /* QRCodeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGeneratorTests.swift; sourceTree = "<group>"; };
 		9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		9D958569243E21700046F25B /* ColorMatrixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMatrixViewController.swift; sourceTree = "<group>"; };
 		9DA3A0CC242EA61200C7B897 /* XCTestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestUtil.swift; sourceTree = "<group>"; };
 		9DB63EF32422CDBB008DFCF5 /* EnumUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumUtil.swift; sourceTree = "<group>"; };
 		9DB63EF52423A460008DFCF5 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				9DFDC2C723B12EF500E939D1 /* AppDelegate.swift */,
 				9DFDC2C923B12EF500E939D1 /* SceneDelegate.swift */,
 				9DFDC2CB23B12EF500E939D1 /* ViewController.swift */,
+				9D958569243E21700046F25B /* ColorMatrixViewController.swift */,
 				9D950F872422A9A600F4DA55 /* QRCodeGenerator.swift */,
 				9DFDC2CD23B12EF500E939D1 /* Main.storyboard */,
 				9DFDC2D023B12EF700E939D1 /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 				9DB63EF42422CDBB008DFCF5 /* EnumUtil.swift in Sources */,
 				9DFDC2C823B12EF500E939D1 /* AppDelegate.swift in Sources */,
 				9DB63EF62423A460008DFCF5 /* UIUtil.swift in Sources */,
+				9D95856A243E21700046F25B /* ColorMatrixViewController.swift in Sources */,
 				9DFDC2CA23B12EF500E939D1 /* SceneDelegate.swift in Sources */,
 				9D3A426D2420F8C3000F666D /* DebugUtil.swift in Sources */,
 			);
