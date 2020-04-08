@@ -148,6 +148,7 @@ struct QRCodeGenerator {
             filter.setValue(CIVector(x: x, y: 0, z: 0, w: 0), forKey: "inputRVector")
             filter.setValue(CIVector(x: 0, y: y, z: 0, w: 0), forKey: "inputGVector")
             filter.setValue(CIVector(x: 0, y: 0, z: z, w: 0), forKey: "inputBVector")
+            print("colorMatrixed rgb: \(x) \(y) \(z)")
             return filter.outputImage
         }
         return nil

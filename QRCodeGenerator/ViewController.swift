@@ -162,6 +162,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var mainVStack = UIStackView.vertical(subviews: [sliderHStack, generatorControlsHStack, exportControlsHStack])
 
+    @objc func doubleTapped() {
+        segueToColorMatrixVC()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
@@ -175,6 +179,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(mainVStack)
 
         layoutSubviews()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -286,5 +294,16 @@ extension UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
+    }
+}
+
+extension ViewController {
+    func segueToColorMatrixVC() {
+        performSegue(withIdentifier: "segueToColorMatrixVC", sender: self)
+    }
+
+    @IBAction func unwindToViewController(_: UIStoryboardSegue) {
+        // let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
     }
 }
