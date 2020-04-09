@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift
+//  QRCodeGenerator.swift v.0.2.0
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -93,13 +93,26 @@ struct QRCodeGenerator {
             if let output = output {
                 return uiImage(from: output)
             }
-            return UIImage()
         }
         return nil
     }
 
+    /*
+     https://stackoverflow.com/questions/38087255/cicolormatrix-filter-result-is-weird
+     Question asked Jun 28 '16 at 22:22 by DanielEdrisian
+     I am trying to create a CIFilter which converts the following QR Code [black-on-white] to [colored-on-black, rgb (0.0, 0.82, 0.60]
+     What the code does is first invert the normal QR code so that it's black on white,
+     then it takes that image and applies a filter "CIColorMatrix" on it.
+     The result of the code is this [colored-on-black, rgb (0.55, 0.95, 0.86], which is not the color that I wanted.
+     Answered Nov 1 '18 at 14:37 by lenooh
+        I had to create a context without a colorspace, to get the color correct:
+        ...
+        let ciContext = CIContext(options: [CIContextOption.outputColorSpace: NSNull(), CIContextOption.workingColorSpace: NSNull()])
+        let cgimg = ciContext.createCGImage(outputs!,from: output!.extent)
+        let processedImage = UIImage(cgImage: cgimg!)
+     */
     private func uiImage(from ciImage: CIImage?) -> UIImage? {
-        let context = CIContext(options: nil)
+        let context = CIContext(options: [CIContextOption.outputColorSpace: NSNull(), CIContextOption.workingColorSpace: NSNull()])
         if let ciImage = ciImage,
             let cgImage = context.createCGImage(ciImage, from: ciImage.extent) {
             return UIImage(cgImage: cgImage)
