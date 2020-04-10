@@ -114,11 +114,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     private lazy var urlEncodedButton = UIButton.actionButton(title: "", action: urlEncodedButtonTap)
 
     @objc func urlEncodedButtonTap(sender: UIButton?) {
-        if sender != nil { generator.urlEncoded.toggle() }
-        textField.isUserInteractionEnabled = !generator.urlEncoded
-        textFieldOverlay.isHidden = !generator.urlEncoded
-        textFieldOverlay.text = generator.qrTextPlainOrUrlEncoded
-        urlEncodedButton.setTitle(generator.urlEncoded ? "url encoded" : "plain", for: .normal)
+        if sender != nil { generator.customUrl.toggle() }
+        textField.isUserInteractionEnabled = !generator.customUrl
+        textFieldOverlay.isHidden = !generator.customUrl
+        textFieldOverlay.text = generator.qrTextOrCustomUrl
+        urlEncodedButton.setTitle(generator.customUrl ? "custom url" : "plain", for: .normal)
     }
 
     @objc func tempExportButtonTap(start: Bool = false) {

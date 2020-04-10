@@ -14,20 +14,24 @@ The API consists of an initializer and input and output properties.
 
 Initializer with default property values:
 ```
-    init(qrText: String = "",
-correctionLevel: CorrectionLevel = .corrPct25,
-    imageSidePt: CGFloat = 0.0,
-     urlEncoded: Bool = false,
-           mode: Mode = .blackOnWhite)
+        init(qrText: String = "hello folks",
+customUrlIdentifier: String = "textreader",
+    correctionLevel: CorrectionLevel = .corrPct15,
+        imageSidePt: CGFloat = 250.0,
+          customUrl: Bool = false,
+               mode: Mode = .blackOnWhite,
+    foregroundColor: CIColor = CIColor(red: 0.206, green: 0.599, blue: 0.860)
+
 ```
 
 
 Input properties:
 ```
 var qrText: String                      // text to be encoded
+var customUrlIdentifier: String         // identifier, like "textreader" in "textreader://hello"
 var correctionLevel: CorrectionLevel    // correction/reundancy level
 var imageSidePt: CGFloat                // side size of the quadratic generated image
-var urlEncoded: Bool                    // url-encodes qrText if true else uses qrText
+var customUrl: Bool                     // false: uses qrText as is, true: creates a custom URL like "textreader://hello%20folks"
 var mode: Mode                          // output mode
 var foregroundColor: CIColor            // color of the QRCode image
 
@@ -52,17 +56,18 @@ var generator = QRCodeGenerator()
 Modify its properties:
 ```
 generator.qrText = "Hello"
+customUrlIdentifier: String = "lipreader"
 generator.correctionLevel = .corrPct7
 generator.imageSidePt = 100.0
-generator.urlEncoded = true
+generator.customUrl = true
 generator.mode = .clearOnWhite
+generator.foregroundColor = CIColor(red: 0.99, green: 0.99, blue: 0.0)
 ```
 Create an instance with modified properties:
 ```
 let generator2 = QRCodeGenerator(qrText: "Bye",
      correctionLevel: .corrPct30,
      imageSidePt: 200.0,
-     urlEncoded: true,
      mode: .clearOnWhite)
 ```
 
@@ -73,5 +78,5 @@ let image: UIImage = generator.uiImage()!
 
 ## class ViewController
 
-Provides a test-and-demo UI for various foregraound and background colors, QRCode image size and modes,
+Provides a test-and-demo UI for various foreground and background colors, QRCode image size and modes,
 QRCode redundancy (7%-30%), urlEncoded or plain, and export to photos or to printer.
