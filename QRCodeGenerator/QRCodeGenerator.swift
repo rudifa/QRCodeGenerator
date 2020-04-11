@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift v.0.2.0
+//  QRCodeGenerator.swift v.0.3.2
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -10,6 +10,18 @@ import Foundation
 import UIKit
 
 struct QRCodeGenerator {
+    /// Return custom URL similar to "textreader://Great!%20It%20works!"
+    /// - Parameters:
+    ///   - urlIdentifier: custom URL identifier for an application
+    ///   - message: message for the target application
+    /// - Returns: URL prefixed with urlIdentifier and percent-encoded message
+    static func customUrl(urlIdentifier: String, message: String) -> String? {
+        if let encodedMessage = message.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            return "\(urlIdentifier)://\(encodedMessage)"
+        }
+        return nil
+    }
+
     enum CorrectionLevel: String, CaseIterable {
         case corrPct7 = "L"
         case corrPct15 = "M"
@@ -43,38 +55,39 @@ struct QRCodeGenerator {
     }
 
     var qrText: String
+    var customUrl: Bool
+    var customUrlIdentifier: String
     var correctionLevel: CorrectionLevel
     var imageSidePt: CGFloat // 0.0 => scale == 1.0
-    var urlEncoded: Bool
     var mode: Mode
-    var foregroundColor = CIColor(red: 0.206, green: 0.599, blue: 0.860) // skyBlue
+    var foregroundColor: CIColor
 
-    init(qrText: String = "hello",
-         correctionLevel: CorrectionLevel = .corrPct25,
-         imageSidePt: CGFloat = 0.0,
-         urlEncoded: Bool = false,
-         mode: Mode = .blackOnWhite) {
-        self.qrText = qrText
-        self.correctionLevel = correctionLevel
-        self.imageSidePt = imageSidePt
-        self.urlEncoded = urlEncoded
-        self.mode = mode
-    }
-
-    var qrTextPlainOrUrlEncoded: String {
-        switch urlEncoded {
-        case false:
+    var qrTextOrCustomUrl: String? {
+        if customUrl {
+            return QRCodeGenerator.customUrl(urlIdentifier: customUrlIdentifier, message: qrText)
+        } else {
             return qrText
-        case true:
-            if let encoded = qrText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-                return encoded
-            }
-            return "NOT_ENCODED:" + qrText
         }
     }
 
+    init(qrText: String = "hello folks",
+         customUrlIdentifier: String = "textreader",
+         correctionLevel: CorrectionLevel = .corrPct15,
+         imageSidePt: CGFloat = 250.0,
+         customUrl: Bool = false,
+         mode: Mode = .coloredOnClear,
+         foregroundColor: CIColor = CIColor(red: 0.206, green: 0.599, blue: 0.860)) {
+        self.qrText = qrText
+        self.customUrl = customUrl
+        self.customUrlIdentifier = customUrlIdentifier
+        self.correctionLevel = correctionLevel
+        self.imageSidePt = imageSidePt
+        self.mode = mode
+        self.foregroundColor = foregroundColor
+    }
+
     var uiImage: UIImage? {
-        if let inputBlackOnWhite = ciImage(from: qrTextPlainOrUrlEncoded) {
+        if let inputBlackOnWhite = ciImage(from: qrTextOrCustomUrl ?? "***") {
             var output: CIImage?
             switch mode {
             case .blackOnClear: output = invertColor(maskToAlpha(invertColor(inputBlackOnWhite)))
@@ -161,7 +174,6 @@ struct QRCodeGenerator {
             filter.setValue(CIVector(x: x, y: 0, z: 0, w: 0), forKey: "inputRVector")
             filter.setValue(CIVector(x: 0, y: y, z: 0, w: 0), forKey: "inputGVector")
             filter.setValue(CIVector(x: 0, y: 0, z: z, w: 0), forKey: "inputBVector")
-            print("colorMatrixed rgb: \(x) \(y) \(z)")
             return filter.outputImage
         }
         return nil
