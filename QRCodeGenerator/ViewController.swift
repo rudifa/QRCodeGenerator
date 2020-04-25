@@ -162,7 +162,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var mainVStack = UIStackView.vertical(subviews: [sliderHStack, generatorControlsHStack, exportControlsHStack])
 
-    @objc func doubleTapped() {
+    @objc func tripleTap() {
         segueToColorMatrixVC()
     }
 
@@ -180,8 +180,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         layoutSubviews()
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap.numberOfTapsRequired = 2
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tripleTap))
+        tap.numberOfTapsRequired = 3
         view.addGestureRecognizer(tap)
     }
 
@@ -191,6 +191,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // now the layout is done
         textField.text = generator.qrText
         generator.imageSidePt = qrCodeImageView.frame.size.width // will fill the view
+
+        generator.logoImage = UIImage(named: "logoSHARE_BN.png")
         qrCodeScaleSlider.maximumValue = Float(generator.imageSidePt)
         qrCodeScaleSlider.value = Float(generator.imageSidePt)
 

@@ -115,8 +115,8 @@ class ColorMatrixViewController: UIViewController {
         view.addSubview(mainVStack)
         layoutSubviews()
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap.numberOfTapsRequired = 2
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tripleTap))
+        tap.numberOfTapsRequired = 3
         view.addGestureRecognizer(tap)
     }
 
@@ -146,7 +146,7 @@ class ColorMatrixViewController: UIViewController {
         ])
     }
 
-    @objc func doubleTapped() {
+    @objc func tripleTap() {
         backToViewController()
     }
 }
