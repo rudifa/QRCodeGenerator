@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift v.0.3.2
+//  QRCodeGenerator.swift v.0.3.3
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -8,6 +8,23 @@
 
 import Foundation
 import UIKit
+
+extension CIImage {
+    /// Combines the current image with the given image centered.
+    func combined(with image: CIImage) -> CIImage? {
+        guard let combinedFilter = CIFilter(name: "CISourceOverCompositing") else { return nil }
+        let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
+        combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
+        combinedFilter.setValue(self, forKey: "inputBackgroundImage")
+        return combinedFilter.outputImage!
+    }
+
+    func rescaleLogo(to qrSize: CGSize) -> CIImage? {
+        let scale = qrSize.width / extent.width / 2.5
+        let transform = CGAffineTransform(scaleX: scale, y: scale)
+        return transformed(by: transform)
+    }
+}
 
 struct QRCodeGenerator {
     /// Return custom URL similar to "textreader://Great!%20It%20works!"
@@ -60,15 +77,8 @@ struct QRCodeGenerator {
     var correctionLevel: CorrectionLevel
     var imageSidePt: CGFloat // 0.0 => scale == 1.0
     var mode: Mode
-    var foregroundColor: CIColor
-
-    var qrTextOrCustomUrl: String? {
-        if customUrl {
-            return QRCodeGenerator.customUrl(urlIdentifier: customUrlIdentifier, message: qrText)
-        } else {
-            return qrText
-        }
-    }
+    var foregroundColor = CIColor(red: 0.206, green: 0.599, blue: 0.860) // skyBlue
+    var logoImage: UIImage?
 
     init(qrText: String = "hello folks",
          customUrlIdentifier: String = "textreader",
@@ -86,28 +96,65 @@ struct QRCodeGenerator {
         self.foregroundColor = foregroundColor
     }
 
+    var qrTextOrCustomUrl: String? {
+        if customUrl {
+            return QRCodeGenerator.customUrl(urlIdentifier: customUrlIdentifier, message: qrText)
+        } else {
+            return qrText
+        }
+    }
+
     var uiImage: UIImage? {
-        if let inputBlackOnWhite = ciImage(from: qrTextOrCustomUrl ?? "***") {
-            var output: CIImage?
-            switch mode {
-            case .blackOnClear: output = invertColor(maskToAlpha(invertColor(inputBlackOnWhite)))
-            case .blackOnColored: output = colored(inputBlackOnWhite)
-            case .blackOnWhite: output = inputBlackOnWhite
-            case .clearOnBlack: output = invertColor(maskToAlpha(inputBlackOnWhite))
-            case .clearOnColored: output = colored(maskToAlpha(inputBlackOnWhite))
-            case .clearOnWhite: output = maskToAlpha(inputBlackOnWhite)
-            case .coloredOnBlack: output = colored(invertColor(inputBlackOnWhite))
-            case .coloredOnWhite: output = coloredBackgroundUnder(maskToAlpha(inputBlackOnWhite))
-            case .coloredOnClear: output = colored(maskToAlpha(invertColor(inputBlackOnWhite)))
-            case .whiteOnBlack: output = invertColor(inputBlackOnWhite)
-            case .whiteOnClear: output = maskToAlpha(invertColor(inputBlackOnWhite))
-            case .whiteOnColored: output = coloredBackgroundUnder(maskToAlpha(invertColor(inputBlackOnWhite)))
+        var encoded = qrImage(from: qrTextOrCustomUrl!)
+        if let logoImage = self.logoImage {
+            if let cgImage = logoImage.cgImage {
+                let ciImage = CIImage(cgImage: cgImage)
+                if let rescaledLogo = ciImage.rescaleLogo(to: (encoded?.extent.size)!) {
+                    encoded = encoded?.combined(with: rescaledLogo)
+                }
             }
-            if let output = output {
-                return uiImage(from: output)
+        }
+        let output = colorize(inputBlackOnWhite: encoded)
+        return uiImage(from: output)
+    }
+
+    /// GENERATE: Returns blackOnWhite QR code image generated from string
+    private func qrImage(from string: String) -> CIImage? {
+        // Core Image Filter Reference says:
+        // To create a QR code from a string or URL, convert it to an NSData object using NSISOLatin1StringEncoding.
+        if let data = string.data(using: .isoLatin1),
+            let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            filter.setValue(correctionLevel.rawValue, forKey: "inputCorrectionLevel")
+
+            if let ciImage = filter.outputImage {
+                // resize to the requested size
+                let scale = imageSidePt == 0.0 ? CGFloat(1.0) : CGFloat(imageSidePt / ciImage.extent.size.height)
+                let transform = CGAffineTransform(scaleX: scale, y: scale)
+                return ciImage.transformed(by: transform)
             }
         }
         return nil
+    }
+
+    /// COLORIZE
+    func colorize(inputBlackOnWhite: CIImage?) -> CIImage? {
+        var output: CIImage?
+        switch mode {
+        case .blackOnClear: output = invertColor(maskToAlpha(invertColor(inputBlackOnWhite)))
+        case .blackOnColored: output = colored(inputBlackOnWhite)
+        case .blackOnWhite: output = inputBlackOnWhite
+        case .clearOnBlack: output = invertColor(maskToAlpha(inputBlackOnWhite))
+        case .clearOnColored: output = colored(maskToAlpha(inputBlackOnWhite))
+        case .clearOnWhite: output = maskToAlpha(inputBlackOnWhite)
+        case .coloredOnBlack: output = colored(invertColor(inputBlackOnWhite))
+        case .coloredOnWhite: output = coloredBackgroundUnder(maskToAlpha(inputBlackOnWhite))
+        case .coloredOnClear: output = colored(maskToAlpha(invertColor(inputBlackOnWhite)))
+        case .whiteOnBlack: output = invertColor(inputBlackOnWhite)
+        case .whiteOnClear: output = maskToAlpha(invertColor(inputBlackOnWhite))
+        case .whiteOnColored: output = coloredBackgroundUnder(maskToAlpha(invertColor(inputBlackOnWhite)))
+        }
+        return output
     }
 
     /*
@@ -124,30 +171,12 @@ struct QRCodeGenerator {
         let cgimg = ciContext.createCGImage(outputs!,from: output!.extent)
         let processedImage = UIImage(cgImage: cgimg!)
      */
+    /// CONVERT TO UIImage
     private func uiImage(from ciImage: CIImage?) -> UIImage? {
         let context = CIContext(options: [CIContextOption.outputColorSpace: NSNull(), CIContextOption.workingColorSpace: NSNull()])
         if let ciImage = ciImage,
             let cgImage = context.createCGImage(ciImage, from: ciImage.extent) {
             return UIImage(cgImage: cgImage)
-        }
-        return nil
-    }
-
-    /// Returns blackOnWhite QR code image generated from string
-    private func ciImage(from string: String) -> CIImage? {
-        // Core Image Filter Reference says:
-        // To create a QR code from a string or URL, convert it to an NSData object using NSISOLatin1StringEncoding.
-        if let data = string.data(using: .isoLatin1),
-            let filter = CIFilter(name: "CIQRCodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            filter.setValue(correctionLevel.rawValue, forKey: "inputCorrectionLevel")
-
-            if let ciImage = filter.outputImage {
-                // resize to the requested size
-                let scale = imageSidePt == 0.0 ? CGFloat(1.0) : CGFloat(imageSidePt / ciImage.extent.size.height)
-                let transform = CGAffineTransform(scaleX: scale, y: scale)
-                return ciImage.transformed(by: transform)
-            }
         }
         return nil
     }
