@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift v.0.3.4
+//  QRCodeGenerator.swift v.0.3.5
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -136,13 +136,12 @@ struct QRCodeGenerator {
 
     /// Return the qrImage combined with logoImage (unchanged if logoImage == nil)
     private func combineWithLogo(qrImage: CIImage?) -> CIImage? {
-        if logoImage == nil {
+        guard let logoImage = self.logoImage else {
             return qrImage // unchanged
-        } else {
-            if let ciImage = CIImage(image: logoImage!) {
-                if let rescaledLogo = ciImage.rescaleLogo(to: (qrImage?.extent.size)!, dividedBy: 2.5) {
-                    return qrImage!.combined(with: rescaledLogo)
-                }
+        }
+        if let ciImage = CIImage(image: logoImage) {
+            if let rescaledLogo = ciImage.rescaleLogo(to: (qrImage?.extent.size)!, dividedBy: 2.5) {
+                return qrImage!.combined(with: rescaledLogo)
             }
         }
         return nil
