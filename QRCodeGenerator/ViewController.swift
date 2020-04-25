@@ -162,7 +162,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var mainVStack = UIStackView.vertical(subviews: [sliderHStack, generatorControlsHStack, exportControlsHStack])
 
-    @objc func doubleTapped() {
+    @objc func tripleTap() {
         segueToColorMatrixVC()
     }
 
@@ -180,8 +180,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         layoutSubviews()
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap.numberOfTapsRequired = 2
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tripleTap))
+        tap.numberOfTapsRequired = 3
         view.addGestureRecognizer(tap)
     }
 
