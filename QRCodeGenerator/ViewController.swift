@@ -192,7 +192,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.text = generator.qrText
         generator.imageSidePt = qrCodeImageView.frame.size.width // will fill the view
 
-        generator.logoImage = UIImage(named: "logoSHARE_BN.png")
+        generator.logoImage = UIImage(named: "logoSHARE_WB.png")
         qrCodeScaleSlider.maximumValue = Float(generator.imageSidePt)
         qrCodeScaleSlider.value = Float(generator.imageSidePt)
 
