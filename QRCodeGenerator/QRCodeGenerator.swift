@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift v.0.3.5
+//  QRCodeGenerator.swift v.0.3.6
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
