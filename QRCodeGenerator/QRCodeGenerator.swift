@@ -1,5 +1,5 @@
 //
-//  QRCodeGenerator.swift v.0.3.5
+//  QRCodeGenerator.swift v.0.3.6
 //  QRCodeGenerator
 //
 //  Created by Rudolf Farkas on 18.03.20.
@@ -14,6 +14,15 @@ extension CIImage {
     func combined(with image: CIImage) -> CIImage? {
         // see https://www.avanderlee.com/swift/qr-code-generation-swift/
         guard let combinedFilter = CIFilter(name: "CISourceOverCompositing") else { return nil }
+        let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
+        combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
+        combinedFilter.setValue(self, forKey: "inputBackgroundImage")
+        return combinedFilter.outputImage
+    }
+    /// Return self (current image) with the given image superposed, centered.
+    func combinedDifference(with image: CIImage) -> CIImage? {
+        // see https://www.avanderlee.com/swift/qr-code-generation-swift/
+        guard let combinedFilter = CIFilter(name: "CIDifferenceBlendMode") else { return nil }
         let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2), y: extent.midY - (image.extent.size.height / 2))
         combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
         combinedFilter.setValue(self, forKey: "inputBackgroundImage")
@@ -140,8 +149,8 @@ struct QRCodeGenerator {
             return qrImage // unchanged
         }
         if let ciImage = CIImage(image: logoImage) {
-            if let rescaledLogo = ciImage.rescaleLogo(to: (qrImage?.extent.size)!, dividedBy: 2.5) {
-                return qrImage!.combined(with: rescaledLogo)
+            if let rescaledLogo = ciImage.rescaleLogo(to: (qrImage?.extent.size)!, dividedBy: 4.0) {
+                return qrImage!.combinedDifference(with: rescaledLogo)
             }
         }
         return nil
